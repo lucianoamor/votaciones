@@ -2,6 +2,7 @@ $(document).ready(function() {
     var apiKey = 'AIzaSyD9Qg1idI2ikXbpcPo51EEO8BMARtsfOvU';
     var FTAsuntosId = '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4';
     initializeSelects();
+    createSelecAno();
     $('#ano').change(function() {
         var ano = $('#ano option:selected').val();
         initializeSelects();
@@ -74,7 +75,7 @@ function FTQuery1(ano, apiKey, FTAsuntosId) {
     });
 }
 function FTQuery2(fecha, apiKey, FTAsuntosId) {
-    var query = 'SELECT \'\ufeffasuntoId\', asunto, hora FROM ' + FTAsuntosId + ' WHERE fecha = \'' + fecha + '\' ORDER BY hora ASC';
+    var query = 'SELECT asuntoId, asunto, hora FROM ' + FTAsuntosId + ' WHERE fecha = \'' + fecha + '\' ORDER BY hora ASC';
     var encodedQuery = encodeURIComponent(query);
     var url = 'https://www.googleapis.com/fusiontables/v1/query?sql=' + encodedQuery + '&key=' + apiKey;
     var arrayRows = [];
@@ -95,7 +96,7 @@ function FTQuery2(fecha, apiKey, FTAsuntosId) {
     });
 }
 function FTQuery3(expediente, apiKey, FTAsuntosId) {
-    var query = 'SELECT \'\ufeffasuntoId\', hora, base, mayoria, resultado, presidente, presentes, ausentes, abstenciones, afirmativos, negativos FROM ' + FTAsuntosId + ' WHERE \'\ufeffasuntoId\' = ' + expediente;
+    var query = 'SELECT asuntoId, hora, base, mayoria, resultado, presidente, presentes, ausentes, abstenciones, afirmativos, negativos FROM ' + FTAsuntosId + ' WHERE asuntoId = ' + expediente;
     var encodedQuery = encodeURIComponent(query);
     var url = 'https://www.googleapis.com/fusiontables/v1/query?sql=' + encodedQuery + '&key=' + apiKey;
     var arrayRows = [];
@@ -122,13 +123,8 @@ function FTQuery3(expediente, apiKey, FTAsuntosId) {
     });
 }
 function initializeSelects() {
-    var date = new Date();
-    var yearIni = 2003;
-    for(var i = date.getFullYear() ; i >= yearIni ; i--)
-        $('#ano option:last').after('<option value="' + i + '">' + i + '</option>');
     $('#ano').parents('.hero-unit').addClass('hero-ok');
     $('#fecha').addClass('disabled').attr('disabled', 'disabled');
-    $('#fecha option:not(:first)').remove();
     $('#fecha').parents('.hero-unit').addClass('hero-no');
     $('#expediente').addClass('disabled').attr('disabled', 'disabled');
     $('#expediente option:not(:first)').remove();
@@ -149,6 +145,12 @@ function initializeSelects3() {
     $('.loading').hide();
     $('.output').hide().html('');
     $('#datos-sesion').hide();
+}
+function createSelecAno() {
+    var date = new Date();
+    var yearIni = 2003;
+    for(var i = date.getFullYear() ; i >= yearIni ; i--)
+        $('#ano option:last').after('<option value="' + i + '">' + i + '</option>');
 }
 function dateToYMD(date) {
     var split = date.split('/');
