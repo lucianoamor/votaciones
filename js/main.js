@@ -104,8 +104,17 @@ function FTQuery3(expediente, apiKey, FTAsuntosId) {
         dataType: 'jsonp',
         success: function (data) {
             if(data.rows.length > 0) {
+                $('#datos-sesion').show();
                 $('#expediente').next('.loading').hide();
-                $('#data').html(data.rows[0][2]);
+                $('#presidente').html(data.rows[0][5]);
+                $('#base').html(data.rows[0][2]);
+                $('#mayoria').html(data.rows[0][3]);
+                $('#resultado').html(data.rows[0][4]);
+                $('#presentes').html(data.rows[0][6]);
+                $('#ausentes').html(data.rows[0][7]);
+                $('#afirmativos').html(data.rows[0][9]);
+                $('#negativos').html(data.rows[0][10]);
+                $('#abstenciones').html(data.rows[0][8]);
             }
             else
                 $('#expediente').nextAll('.output').show().html('Falló la consulta a Google Fusion Tables');
@@ -126,6 +135,7 @@ function initializeSelects() {
     $('#expediente').parents('.hero-unit').addClass('hero-no');
     $('.loading').hide();
     $('.output').hide().html('');
+    $('#datos-sesion').hide();
 }
 function initializeSelects2() {
     $('#expediente').addClass('disabled').attr('disabled', 'disabled');
@@ -133,10 +143,12 @@ function initializeSelects2() {
     $('#expediente').parents('.hero-unit').addClass('hero-no');
     $('.loading').hide();
     $('.output').hide().html('');
+    $('#datos-sesion').hide();
 }
 function initializeSelects3() {
     $('.loading').hide();
     $('.output').hide().html('');
+    $('#datos-sesion').hide();
 }
 function dateToYMD(date) {
     var split = date.split('/');
