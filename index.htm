@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Disciplina de bloques</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Disciplina de bloques</a>
+            <ul class="nav">
+                <li><a href="index.htm">Inicio</a></li>
+                <li><a href="proyecto.htm">Proyecto</a></li>
+                <li><a href="documentacion.htm">Documentación</a></li>
+                <li><a href="equipo.htm">Equipo</a></li>
+                <li><a href="http://hhba.info/" target="_blank">HHBA</a></li>
+                <li><a href="contacto.htm">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span3">
+            <div class="hero-unit">
+                <div class="control-group">
+                    <label class="control-label" for="ano">Año</label>
+                    <div class="controls">
+                        <select id="ano" name="ano">
+                            <option value="0">--- elegir ---</option>
+                        </select>
+                        <div class="loading"><img src="img/loading.gif" alt="" /></div>
+                        <div class="output text-error"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="hero-unit">
+                <div class="control-group">
+                    <label class="control-label" for="fecha">Fecha</label>
+                    <div class="controls">
+                        <select id="fecha" name="fecha">
+                            <option value="0">--- elegir ---</option>
+                        </select>
+                        <div class="loading"><img src="img/loading.gif" alt="" /></div>
+                        <div class="output text-error"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="hero-unit">
+                <div class="control-group">
+                    <label class="control-label" for="expediente">Expediente</label>
+                    <div class="controls">
+                        <select id="expediente" name="expediente">
+                            <option value="0">--- elegir ---</option>
+                        </select>
+                        <div class="loading"><img src="img/loading.gif" alt="" /></div>
+                        <div class="output text-error"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span6">
+            <div id="data"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+.container {
+	font-family: 'Open Sans';
+}
+.hero-unit {
+    padding: 30px;
+}
+.hero-ok {
+    background-color: #DFF0D8;
+}
+.hero-no {
+    background-color: #ddd;
+}
+.hero-unit label {
+    font-size: 20px;
+}
+.loading {
+    float: right;
+}
+.output {
+    font-size: 12px;
+    line-height: normal;
+}
+.span3 .hero-unit select {
+    width: 170px;
+}
+.span6 .hero-unit select {
+    width: 470px;
+}
