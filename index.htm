@@ -11,9 +11,6 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="shortcut icon" href="img/favicon.ico" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
 </head>
 <body>
 <div class="container">
@@ -83,6 +80,8 @@
             </div>
         </div>
     </div>
+    <div class="row" id="cuadrantes">
+    </div>
     <div class="row" id="datos-sesion">
         <div class="span3">
             <p>Presidente</p>
@@ -91,8 +90,6 @@
             <p><strong><span id="base"></span></strong></p>
             <p>Mayoría</p>
             <p><strong><span id="mayoria"></span></strong></p>
-            <p>Resultado</p>
-            <p><strong><span id="resultado"></span></strong></p>
         </div>
         <div class="span3">
             <p>Presentes</p>
@@ -100,7 +97,7 @@
             <p>Ausentes</p>
             <p><strong><span id="ausentes"></span></strong></p>
         </div>
-        <div class="span6">
+        <div class="span3">
             <p>Afirmativos</p>
             <p><strong><span id="afirmativos"></span></strong></p>
             <p>Negativos</p>
@@ -108,7 +105,15 @@
             <p>Abstenciones</p>
             <p><strong><span id="abstenciones"></span></strong></p>
         </div>
+        <div class="span3">
+            <p>Resultado</p>
+            <p><strong><span id="resultado"></span></strong></p>
+        </div>
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

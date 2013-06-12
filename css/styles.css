@@ -3,6 +3,7 @@
 }
 .hero-unit {
     padding: 30px;
+    margin: 0;
 }
 .hero-ok {
     background-color: #DFF0D8;
@@ -25,4 +26,9 @@
 }
 .span6 .hero-unit select {
     width: 470px;
+}
+#cuadrantes {
+    margin: 20px 0 20px 4px;
+    border: 1px solid #ddd;
+    width: 1160px;
 }
