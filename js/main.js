@@ -183,10 +183,10 @@ function dateToDMY(date) {
 }
 var svg;
 var radio = 10;
-var ancho = 1160;
+var ancho = 870;
 var maxDiputados = 260; // levantar de FT
 var alto = Math.ceil(maxDiputados /  Math.ceil((ancho/2)/(radio*2))) * (radio*2) * 2;
-var maxFila = Math.ceil((ancho/2)/(radio*2))-1;
+var maxFila = Math.floor((ancho/2)/(radio*2))-1;
 var color = new Array();
 color[56] = '#0000FF';
 

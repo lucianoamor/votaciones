@@ -28,7 +28,7 @@
     width: 470px;
 }
 #cuadrantes {
-    margin: 20px 0 20px 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
-    width: 1160px;
 }
