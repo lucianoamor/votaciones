@@ -109,11 +109,34 @@ function FTQuery3(expediente, apiKey, FTAsuntosId, FTVotacionesId) {
                 $('#base').html(data.rows[0][2]);
                 $('#mayoria').html(data.rows[0][3]);
                 $('#resultado').html(data.rows[0][4]);
-                $('#presentes').html(data.rows[0][6]);
-                $('#ausentes').html(data.rows[0][7]);
-                $('#afirmativos').html(data.rows[0][9]);
-                $('#negativos').html(data.rows[0][10]);
-                $('#abstenciones').html(data.rows[0][8]);
+                if(data.rows[0][4].toLowerCase() == "afirmativo")
+                    $('#resultado').parent().addClass('badge-success');
+                else
+                    $('#resultado').parent().addClass('badge-important');
+                var presentes = parseInt(data.rows[0][6], 10);
+                var ausentes = parseInt(data.rows[0][7], 10);
+                var afirmativos = parseInt(data.rows[0][9], 10);
+                var negativos = parseInt(data.rows[0][10], 10);
+                var abstenciones = parseInt(data.rows[0][8], 10);
+                var total = presentes + ausentes;
+                var afirmativosP = afirmativos/total;
+                var negativosP = negativos/total;
+                var abstencionesP = abstenciones/total;
+                var ausentesP = ausentes/total;
+                $('#presentes').html(presentes);
+                $('#ausentes').html(ausentes);
+                $('#afirmativos').html(afirmativos);
+                $('#negativos').html(negativos);
+                $('#abstenciones').html(abstenciones);
+                $('#afirmativosP').html((afirmativosP*100).toFixed(2));
+                $('#negativosP').html((negativosP*100).toFixed(2));
+                $('#abstencionesP').html((abstencionesP*100).toFixed(2));
+                $('#ausentesP').html((ausentesP*100).toFixed(2));
+                var base100 = 268;
+                $('.txt-afirmativos .grafico').css('width', base100*afirmativosP);
+                $('.txt-negativos .grafico').css('width', base100*negativosP);
+                $('.txt-abstenciones .grafico').css('width', base100*abstencionesP);
+                $('.txt-ausentes .grafico').css('width', base100*ausentesP);
                 // busco votacion
                 FTQueryVotacion(data.rows[0][0], apiKey, FTVotacionesId);
             }
@@ -183,10 +206,11 @@ function dateToDMY(date) {
 }
 var svg;
 var radio = 10;
-var ancho = 870;
+var ancho = 860;
 var maxDiputados = 260; // levantar de FT
-var alto = Math.ceil(maxDiputados /  Math.ceil((ancho/2)/(radio*2))) * (radio*2) * 2;
-var maxFila = Math.floor((ancho/2)/(radio*2))-1;
+var maxFila = Math.floor((ancho)/(radio*2));
+var alto = Math.ceil(maxDiputados /  maxFila) * (radio*2) * 4;
+maxFila--;
 var color = new Array();
 color[56] = '#0000FF';
 
@@ -194,8 +218,50 @@ function votacionesIni() {
     svg = d3.select('#cuadrantes').append('svg')
         .attr('width', ancho)
         .attr('height', alto)
-        .append('g')
-            .attr('transform', 'translate(10, 10)');
+      .append('g')
+        .attr('transform', 'translate(0, 0)');
+    svg.append('rect')
+        .attr('x', '0')
+        .attr('y', '0')
+        .attr('width', ancho)
+        .attr('height', alto/4)
+        .attr('class', 'afirmativos');
+    svg.append('rect')
+        .attr('x', '0')
+        .attr('y', alto/4)
+        .attr('width', ancho)
+        .attr('height', alto/4)
+        .attr('class', 'negativos');
+    svg.append('rect')
+        .attr('x', '0')
+        .attr('y', alto/2)
+        .attr('width', ancho)
+        .attr('height', alto/4)
+        .attr('class', 'abstenciones');
+    svg.append('rect')
+        .attr('x', '0')
+        .attr('y', (alto*3)/4)
+        .attr('width', ancho)
+        .attr('height', alto/4)
+        .attr('class', 'ausentes');
+    svg.append('line')
+        .attr('x1', '0')
+        .attr('y1', alto/4)
+        .attr('x2', ancho)
+        .attr('y2', alto/4)
+        .attr('class', 'linea');
+    svg.append('line')
+        .attr('x1', '0')
+        .attr('y1', alto/2)
+        .attr('x2', ancho)
+        .attr('y2', alto/2)
+        .attr('class', 'linea');
+    svg.append('line')
+        .attr('x1', '0')
+        .attr('y1', (alto*3)/4)
+        .attr('x2', ancho)
+        .attr('y2', (alto*3)/4)
+        .attr('class', 'linea');
 }
 function votaciones(dataVotacion) {
     var posX = [0, 0, 0, 0];
@@ -206,56 +272,39 @@ function votaciones(dataVotacion) {
             return d[0];
         });
     // enter
-    dotEnter = dot.enter().insert('g')
-        .attr('class', 'grupoDiputado');
-    dotEnter.append('circle')
+    dot.enter().append('circle')
         .attr('r', 0)
         .attr('fill', '#dddddd')
-        .attr('id', function(d) {
-            return d[0];
-        })
         .attr('title', function(d) {
             return '<h4>' + d[0] + '</h4><p>' + d[1] + '</p>';
         })
         .attr('data-toggle', 'tooltip');
     // exit
-    dot.exit()
-        .transition()
-            .duration(1500)
-            .attr('r', 0)
-        .remove();
+    dot.exit().remove();
     // transition
-    var grupoUpdate = svg.selectAll('.grupoDiputado')
+    var grupoUpdate = svg.selectAll('circle')
       .transition()
-        .duration(1500);
-    grupoUpdate.selectAll('circle')
+        .duration(1500)
         .attr('cx', function(d) {
             var voto = d[2];
-            var x, iniX;
-            if(voto%2 == 0) // cuadrante 0 o 2
-                iniX = 0;
-            else
-                iniX = ancho/2;
+            var x;
             if(posX[voto] > maxFila)
                 posX[voto] = 0;
-            x = iniX + ((radio*2) * posX[voto]);
+            x = (radio*2) * posX[voto];
             posX[voto]++;
-            return x;
+            return x + radio;
         })
         .attr('cy', function(d) {
             var voto = d[2];
-            var y, iniY;
-            if(voto < 2) // cuadrante 0 o 1
-                iniY = 0;
-            else
-                iniY = alto/2;
+            var y;
+            var iniY = voto * (alto/4);
             if(posY[voto] > maxFila) {
                 fila[voto]++;
                 posY[voto] = 0;
             }
             y = iniY + ((radio*2) * fila[voto]);
             posY[voto]++;
-            return y;
+            return y + radio;
         })
         .attr("r", radio-1)
         .attr('fill', function(d) {

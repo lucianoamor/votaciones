@@ -2,11 +2,11 @@
 	font-family: 'Open Sans';
 }
 .hero-unit {
-    padding: 30px;
+    padding: 20px;
     margin: 0;
 }
 .hero-ok {
-    background-color: #DFF0D8;
+    background-color: #D9EDF7;
 }
 .hero-no {
     background-color: #ddd;
@@ -22,13 +22,90 @@
     line-height: normal;
 }
 .span3 .hero-unit select {
-    width: 170px;
+    width: 190px;
 }
 .span6 .hero-unit select {
-    width: 470px;
+    width: 490px;
 }
 #cuadrantes {
     margin-top: 20px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
+}
+#datos-sesion p.titulo {
+    margin-bottom: 2px;
+}
+#datos-sesion p {
+    margin-bottom: 15px;
+}
+.afirmativos {
+    fill: #DFF0D8;
+}
+.negativos {
+    fill: #F2DEDE;
+}
+.abstenciones {
+    fill: #FCF8E3;
+}
+.ausentes {
+    fill: #ddd;
+}
+.linea {
+    stroke-width: 1px;
+    stroke: #000;
+    stroke-dasharray: 2, 4;
+}
+.txt-datos {
+    height: 139px;
+    border-bottom: 1px solid #999;
+}
+.txt-datos h4 {
+    margin: 0;
+    padding: 10px 0;
+    float: left;
+}
+.txt-afirmativos {
+    margin-top: 20px;
+}
+.txt-ausentes {
+    border-bottom: 0;
+}
+.txt-datos .badge-warning {
+    background-color: #cc0;
+}
+.txt-datos .base-grafico {
+    width: 268px;
+    height: 15px;
+    border: 1px solid #999;
+    background-color: #ddd;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius: 3px;
+    clear: both;
+}
+.txt-datos .grafico {
+    height: 15px;
+}
+.txt-datos .badge {
+    float: right;
+    margin-top: 12px;
+}
+.txt-afirmativos .grafico {
+    background-color: #468847;
+}
+.txt-negativos .grafico {
+    background-color: #B94A48;
+}
+.txt-abstenciones .grafico {
+    background-color: #cc0;
+}
+.txt-ausentes .grafico {
+    background-color: #999;
+}
+.txt-datos p.porcentaje {
+    font-size: 35px;
+    font-weight: bold;
+    color: #ccc;
+    text-align: center;
+    margin: 15px 0 0;
+    line-height: normal;
 }
