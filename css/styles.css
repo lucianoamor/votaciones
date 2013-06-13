@@ -29,7 +29,7 @@
 }
 #cuadrantes {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 #datos-sesion p.titulo {
     margin-bottom: 2px;
@@ -107,5 +107,9 @@
     color: #ccc;
     text-align: center;
     margin: 15px 0 0;
+    line-height: normal;
+}
+h3#asunto {
+    margin-top: 0;
     line-height: normal;
 }

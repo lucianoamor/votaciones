@@ -94,7 +94,7 @@ function FTQuery2(fecha, apiKey, FTAsuntosId) {
     });
 }
 function FTQuery3(expediente, apiKey, FTAsuntosId, FTVotacionesId) {
-    var query = 'SELECT asuntoId, hora, base, mayoria, resultado, presidente, presentes, ausentes, abstenciones, afirmativos, negativos FROM ' + FTAsuntosId + ' WHERE asuntoId = ' + expediente;
+    var query = 'SELECT asuntoId, asunto, base, mayoria, resultado, presidente, presentes, ausentes, abstenciones, afirmativos, negativos FROM ' + FTAsuntosId + ' WHERE asuntoId = ' + expediente;
     var encodedQuery = encodeURIComponent(query);
     var url = 'https://www.googleapis.com/fusiontables/v1/query?sql=' + encodedQuery + '&key=' + apiKey;
     $.ajax({
@@ -105,6 +105,9 @@ function FTQuery3(expediente, apiKey, FTAsuntosId, FTVotacionesId) {
             if(data.rows) {
                 // muestro datos
                 $('#datos-sesion').show();
+                $('#cuadrantes').show();
+                $('#cuadrantes-der').show();
+                $('#asunto').html(data.rows[0][1]);
                 $('#presidente').html(data.rows[0][5]);
                 $('#base').html(data.rows[0][2]);
                 $('#mayoria').html(data.rows[0][3]);
@@ -170,6 +173,8 @@ function initializeSelects() {
     $('.loading').hide();
     $('.output').hide().html('');
     $('#datos-sesion').hide();
+    $('#cuadrantes').hide();
+    $('#cuadrantes-der').hide();
 }
 function initializeSelects2() {
     $('#expediente').addClass('disabled').attr('disabled', 'disabled');
@@ -177,12 +182,10 @@ function initializeSelects2() {
     $('#expediente').parents('.hero-unit').addClass('hero-no');
     $('.loading').hide();
     $('.output').hide().html('');
-    $('#datos-sesion').hide();
 }
 function initializeSelects3() {
     $('.loading').hide();
     $('.output').hide().html('');
-    $('#datos-sesion').hide();
 }
 function createSelecAno() {
     var date = new Date();
